@@ -1,5 +1,7 @@
 import React from 'react';
-import PlayersTable from '../components/PlayersTable'
+import PlayersTable from '../components/PlayersTable';
+import CityOptions from '../components/CityOptions';
+import TeamOptions from '../components/TeamOptions';
 
 function Players() {
     return (
@@ -18,6 +20,7 @@ function Players() {
                         <th>Career Rebounds</th>
                         <th>Hometown</th>
                         <th>Current Team</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>

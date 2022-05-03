@@ -13,6 +13,7 @@ function Teams() {
                         <th>Name</th>
                         <th>Mascot</th>
                         <th>Location</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>

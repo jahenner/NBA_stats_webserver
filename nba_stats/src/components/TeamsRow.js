@@ -1,4 +1,5 @@
 import React from "react";
+import { MdDeleteForever, MdEditNote } from "react-icons/md";
 
 function TeamsRow() {
     return (
@@ -12,6 +13,7 @@ function TeamsRow() {
             <td>
                 Data
             </td>
+            <td><MdEditNote onClick={() => console.log("edit")} /></td>
         </>
         
     );

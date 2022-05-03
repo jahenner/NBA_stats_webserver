@@ -6,8 +6,9 @@ import Navigation from './components/Navigation.js';
 import HomePage from './pages/HomePage.js';
 import Cities from './pages/Cities.js';
 import Players from './pages/Players.js';
-import Teams from './pages/Teams.js'
-import Games from './pages/Games.js'
+import Teams from './pages/Teams.js';
+import Games from './pages/Games.js';
+import PlayerStats from './pages/PlayerStats.js';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" exact><HomePage /></Route>
           <Route path="/teams"><Teams /></Route>
           <Route path="/players"><Players /></Route>
+          <Route path='/playerstats'><PlayerStats /></Route>
           <Route path="/cities"><Cities /></Route>
           <Route path="/games"><Games /></Route>
         </main>
