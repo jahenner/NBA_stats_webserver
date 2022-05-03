@@ -27,6 +27,15 @@ function Cities() {
                 <input class="btn" type="submit" id="addCities" value="Add a City"></input>
                 <input class="btn" type="button" value="cancel"></input>
             </form>
+            <form id="editCities">
+                <legend><strong>Edit City (use the edit icon next to the City you would like to edit)</strong></legend>
+                <fieldset class="fields">
+                    <label> Name </label> <input type="text" name="name" />
+                    <label> Population </label> <input type="number" name="population" />
+                </fieldset>
+                <input class="btn" type="submit" id="editCities" value="Edit a City"></input>
+                <input class="btn" type="button" value="cancel"></input>
+            </form>
         </article>
         
     );

@@ -39,6 +39,22 @@ function Games() {
                 <input class="btn" type="submit" id="addGames" value="Add a Game"></input>
                 <input class="btn" type="button" value="cancel"></input>
             </form>
+            <form id="editGames">
+                <legend><strong>Edit Game (use the edit icon next to the Game you would like to edit)</strong></legend>
+                <fieldset class="fields">
+                    <label> Date </label> <input type="text" name="date" />
+                    <label> Home Team </label> <select name="home_team_id">
+                        <TeamOptions />
+                    </select>
+                    <label> Away Team </label> <select name="home_team_id">
+                        <TeamOptions />
+                    </select>
+                    <label> Home Team Score </label> <input type="number" name="home_team_score" />
+                    <label> Away Team Score </label> <input type="number" name="away_team_score" />
+                </fieldset>
+                <input class="btn" type="submit" id="editGames" value="Edit a Game"></input>
+                <input class="btn" type="button" value="cancel"></input>
+            </form>
         </article>
         
     );

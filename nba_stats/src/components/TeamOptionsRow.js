@@ -1,7 +1,7 @@
 import React from "react";
 
 
-function GamesRow() {
+function TeamsOptionsRow() {
     return (
         // update value to id of team
         <option value="1">TeamNameData</option>
@@ -9,4 +9,4 @@ function GamesRow() {
     );
 };
 
-export default GamesRow;
+export default TeamsOptionsRow;
