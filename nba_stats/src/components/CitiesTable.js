@@ -1,10 +1,10 @@
 import React from 'react';
 import CitiesRow from './CitiesRow';
 
-function CitiesTable() {
+function CitiesTable({cities}) {
     return (
         <>
-            <CitiesRow />
+            {cities.map((city) => <CitiesRow city={city} key={city.city_id}/>)}
         </>
     );
 };

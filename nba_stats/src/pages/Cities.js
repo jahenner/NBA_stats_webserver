@@ -1,7 +1,20 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import CitiesTable from '../components/CitiesTable'
 
 function Cities() {
+    const [cities, setCities] = useState([]);
+
+    const loadCities = async () => {
+        const response = await fetch('localhost:9124/GetCities');
+        const cities = await response.json();
+        setCities(cities);
+    };
+
+    useEffect(() => {
+        loadCities();
+    }, []);
+
     return (
         <article>
             <h2>Cities</h2>
@@ -15,7 +28,7 @@ function Cities() {
                     </tr>
                 </thead>
                 <tbody>
-                    <CitiesTable />
+                    <CitiesTable cities={cities}/>
                 </tbody>
             </table>
             <form id="addCities">
