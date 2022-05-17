@@ -6,8 +6,11 @@ function Cities() {
     const [cities, setCities] = useState([]);
 
     const loadCities = async () => {
-        const response = await fetch('localhost:9124/GetCities');
+        console.log("starting fetch");
+        const response = await fetch('/GetCities');
+        console.log("got response")
         const cities = await response.json();
+        console.log("getting results")
         setCities(cities);
     };
 
@@ -33,21 +36,21 @@ function Cities() {
             </table>
             <form id="addCities">
                 <legend><strong>Add City</strong></legend>
-                <fieldset class="fields">
+                <fieldset className="fields">
                     <label> Name </label> <input type="text" name="name" />
                     <label> Population </label> <input type="number" name="population" />
                 </fieldset>
-                <input class="btn" type="submit" id="addCities" value="Add a City"></input>
-                <input class="btn" type="button" value="cancel"></input>
+                <input className="btn" type="submit" id="addCities" value="Add a City"></input>
+                <input className="btn" type="button" value="cancel"></input>
             </form>
             <form id="editCities">
                 <legend><strong>Edit City (use the edit icon next to the City you would like to edit)</strong></legend>
-                <fieldset class="fields">
+                <fieldset className="fields">
                     <label> Name </label> <input type="text" name="name" />
                     <label> Population </label> <input type="number" name="population" />
                 </fieldset>
-                <input class="btn" type="submit" id="editCities" value="Edit a City"></input>
-                <input class="btn" type="button" value="cancel"></input>
+                <input className="btn" type="submit" id="editCities" value="Edit a City"></input>
+                <input className="btn" type="button" value="cancel"></input>
             </form>
         </article>
         
