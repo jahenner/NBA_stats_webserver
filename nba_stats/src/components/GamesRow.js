@@ -1,30 +1,34 @@
 import React from "react";
-import { MdDeleteForever, MdEditNote } from "react-icons/md";
+import { MdDeleteForever, MdEditNote, MdOutlineDelete } from "react-icons/md";
 
 
-function GamesRow() {
+function GamesRow({game, onDelete}) {
     return (
         <>
+        <tr>
             <td>
-                Data
+                {game.date}
             </td>
             <td>
-                Data
+                {game.home_team}
             </td>
             <td>
-                Data
+                {game.away_team}
             </td>
             <td>
-                Data
+                {game.home_team_score}
             </td>
             <td>
-                Data
+                {game.away_team_score}
             </td>
             <td><MdEditNote onClick={() => console.log("edit")} /></td>
-            <td><MdDeleteForever onClick={() => console.log("delete")} /></td>
+            <td><MdDeleteForever onClick={() => onDelete(game.game_id) } /></td>
+            </tr>
         </>
         
     );
 };
 
 export default GamesRow;
+
+// onDelete(game.game_id)

@@ -1,8 +1,35 @@
 import React from 'react';
 import GamesTable from '../components/GamesTable'
 import TeamOptions from '../components/TeamOptions.js'
+import { useState, useEffect } from 'react';
 
 function Games() {
+
+    const [games, setGames] = useState([]);
+
+    const onDelete = async game_id => {
+        const response = await fetch(`/games/${game_id}`, { method: 'DELETE'});
+        if (response.status === 204) {
+            const newGame = games.filter(e => e.game_id !== game_id);
+            setGames(newGame);
+        } else {
+            console.error(`Failed to delete exercise with game_id = ${game_id}, status code = ${response.status}`);
+        }
+    };
+
+    const loadGames = async () => {
+        console.log("starting fetch");
+        const response = await fetch('/GetGames');
+        console.log("got response")
+        const games = await response.json();
+        console.log("getting results")
+        setGames(games);
+    };
+
+    useEffect(() => {
+        loadGames();
+    }, []);
+
     return (
         <article>
             <h2>Games</h2>
@@ -20,7 +47,7 @@ function Games() {
                     </tr>
                 </thead>
                 <tbody>
-                    <GamesTable />
+                    <GamesTable games={games} onDelete={onDelete} />
                 </tbody>
             </table>
             <form id="addGames">

@@ -1,10 +1,10 @@
 import React from 'react';
 import GamesRow from './GamesRow';
 
-function GamesTable() {
+function GamesTable({games, onDelete}) {
     return (
         <>
-            <GamesRow />
+            {games.map((game) => <GamesRow game={game} onDelete={onDelete}/>)}
         </>
     );
 };

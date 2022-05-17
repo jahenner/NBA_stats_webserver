@@ -5,6 +5,7 @@ function CitiesRow({city}) {
     console.log(city)
     return (
         <>
+        <tr>
             <td>
                 {city.name}
             </td>
@@ -12,6 +13,7 @@ function CitiesRow({city}) {
                 {city.population}
             </td>
             <td><MdEditNote onClick={() => console.log("edit")} /></td>
+        </tr>
         </>
         
     );
