@@ -41,16 +41,17 @@ function Games() {
         }
     }
 
-    const editGame = async () => {
+    const editGame = async (e) => {
         console.log(game)
-        const response = await fetch(`/GetGames/${game.game_id}`, {
+        // e.preventDefault()
+        const response = await fetch(`/UpdateGame/${game.game_id}`, {
             method: 'PUT',
             body: JSON.stringify(game),
             headers: {
                 "Content-Type": "application/json"
             }
         });
-        if (response.status === 200) {
+        if (response.status === 201) {
             alert("Successfully edited the game");
         } else {
             alert(`Failed to edit game, status code = ${response.status}`);
@@ -162,7 +163,7 @@ function Games() {
                         value={game.away_team_score}
                         onChange={e => setGame(game => ({...game, away_team_score: parseInt(e.target.value)}))} />
                 </fieldset>
-                <input className="btn" type="submit" id="editGames" value="Edit a Game" onClick={editGame}></input>
+                <input className="btn" type="submit" id="editGames" value="Edit a Game" onClick={e => editGame(e)}></input>
                 <input className="btn" type="button" value="cancel" onClick={resetEdit}></input>
             </form>
         </article>
