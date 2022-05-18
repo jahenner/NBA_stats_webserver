@@ -1,7 +1,7 @@
 import React from 'react';
 import PlayersTable from '../components/PlayersTable';
 import CityOptions from '../components/CityOptions';
-import TeamOptions from '../components/TeamOptions';
+// import TeamOptions from '../components/TeamOptions';
 
 function Players() {
     return (
@@ -41,7 +41,7 @@ function Players() {
                         <CityOptions />
                     </select>
                     <label> Current Team </label> <select name="team_id">
-                        <TeamOptions />
+                        {/* <TeamOptions /> */}
                     </select>
                 </fieldset>
                 <input class="btn" type="submit" id="addPlayerss" value="Add a Player"></input>
@@ -61,7 +61,7 @@ function Players() {
                         <CityOptions />
                     </select>
                     <label> Current Team </label> <select name="team_id">
-                        <TeamOptions />
+                        {/* <TeamOptions /> */}
                     </select>
                 </fieldset>
                 <input class="btn" type="submit" id="editPlayerss" value="Edit a Player"></input>

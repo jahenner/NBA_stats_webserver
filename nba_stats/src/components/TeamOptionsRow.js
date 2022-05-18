@@ -1,10 +1,10 @@
 import React from "react";
 
 
-function TeamsOptionsRow() {
+function TeamsOptionsRow({team, setHomeTeam}) {
     return (
         // update value to id of team
-        <option value="1">TeamNameData</option>
+        <option value={team.team_id} >{team.name}</option>
         
     );
 };
