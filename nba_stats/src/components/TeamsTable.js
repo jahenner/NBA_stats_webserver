@@ -1,10 +1,10 @@
 import React from 'react';
 import TeamsRow from './TeamsRow';
 
-function TeamsTable() {
+function TeamsTable({teams}) {
     return (
         <>
-            <TeamsRow/>
+            {teams.map((team) => <TeamsRow team={team} key={team.team_id}/>)}
         </>
     );
 };

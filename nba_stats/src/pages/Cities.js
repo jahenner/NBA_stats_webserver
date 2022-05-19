@@ -7,7 +7,7 @@ function Cities() {
 
     const loadCities = async () => {
         console.log("starting fetch");
-        const response = await fetch('/GetCities');
+        const response = await fetch('/server/GetCities');
         console.log("got response")
         const cities = await response.json();
         console.log("getting results")

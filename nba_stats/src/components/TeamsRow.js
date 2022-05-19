@@ -1,17 +1,17 @@
 import React from "react";
 import { MdDeleteForever, MdEditNote } from "react-icons/md";
 
-function TeamsRow() {
+function TeamsRow({team}) {
     return (
         <>
             <td>
-                Data
+                {team.name}
             </td>
             <td>
-                Data
+                {team.mascot}
             </td>
             <td>
-                Data
+                {team.location}
             </td>
             <td><MdEditNote onClick={() => console.log("edit")} /></td>
         </>

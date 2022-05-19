@@ -20,13 +20,14 @@ function Games() {
         const response = await fetch(`/server/GetGames/${game_id}`, { method: 'DELETE'});
         if (response.status === 204) {
             setDeleted(deleted+1);
+            
         } else {
             console.error(`Failed to delete exercise with game_id = ${game_id}, status code = ${response.status}`);
         }
-        history.push("/games")
     };
 
-    const addGame = async () => {
+    const addGame = async (e) => {
+        e.preventDefault()
         const newGame = {date, homeTeam, awayTeam, homeScore, awayScore}
         console.log(newGame)
         const response = await fetch("/server/addGame", {
@@ -46,7 +47,7 @@ function Games() {
 
     const editGame = async (e) => {
         console.log(game)
-        // e.preventDefault()
+        e.preventDefault()
         const response = await fetch(`/server/UpdateGame/${game.game_id}`, {
             method: 'PUT',
             body: JSON.stringify(game),
@@ -59,7 +60,6 @@ function Games() {
         } else {
             alert(`Failed to edit game, status code = ${response.status}`);
         }
-        history.push("/games")
     }
 
     const reset = () => {
@@ -139,7 +139,7 @@ function Games() {
                         value={awayScore}
                         onChange={e => setAwayScore(parseInt(e.target.value))} />
                 </fieldset>
-                <input className="btn" type="submit" id="addGames" value="Add a Game" onClick={addGame}></input>
+                <input className="btn" type="submit" id="addGames" value="Add a Game" onClick={e => addGame(e)}></input>
                 <input className="btn" type="button" value="cancel" onClick={reset}></input>
             </form>
             <form id="editGames">

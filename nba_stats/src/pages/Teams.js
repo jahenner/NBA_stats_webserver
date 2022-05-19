@@ -3,6 +3,21 @@ import TeamsTable from '../components/TeamsTable'
 import CityOptions from '../components/CityOptions'
 
 function Teams() {
+    const [teams, setTeams] = useState([]);
+
+    const loadTeams = async () => {
+        console.log("starting fetch");
+        const response = await fetch('/server/GetTeams');
+        console.log("got response")
+        const teams = await response.json();
+        console.log("getting results")
+        setTeams(teams);
+    };
+
+    useEffect(() => {
+        loadTeams();
+    }, []);
+
     return (
         <article>
             <h2>Teams</h2>
@@ -17,7 +32,7 @@ function Teams() {
                     </tr>
                 </thead>
                 <tbody>
-                    <TeamsTable />
+                    <TeamsTable teams={teams} />
                 </tbody>
             </table>
             <form id="addTeams">
