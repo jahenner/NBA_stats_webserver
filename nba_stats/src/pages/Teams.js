@@ -1,6 +1,7 @@
 import React from 'react';
 import TeamsTable from '../components/TeamsTable'
 import CityOptions from '../components/CityOptions'
+import { useState, useEffect } from 'react';
 
 function Teams() {
     const [teams, setTeams] = useState([]);
