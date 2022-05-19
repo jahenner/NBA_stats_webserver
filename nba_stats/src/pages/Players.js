@@ -1,6 +1,7 @@
 import React from 'react';
 import PlayersTable from '../components/PlayersTable';
 import CityOptions from '../components/CityOptions';
+import { useState, useEffect } from 'react';
 // import TeamOptions from '../components/TeamOptions';
 
 function Players() {
