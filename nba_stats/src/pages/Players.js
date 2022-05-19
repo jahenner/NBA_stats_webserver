@@ -4,6 +4,21 @@ import CityOptions from '../components/CityOptions';
 // import TeamOptions from '../components/TeamOptions';
 
 function Players() {
+    const [players, setPlayers] = useState([]);
+
+    const loadPlayers = async () => {
+        console.log("starting fetch");
+        const response = await fetch('/server/GetPlayers');
+        console.log("got response")
+        const players = await response.json();
+        console.log("getting results")
+        setPlayers(players);
+    };
+
+    useEffect(() => {
+        loadPlayers();
+    }, []);
+
     return (
         <article>
             <h2>Players</h2>
@@ -24,7 +39,7 @@ function Players() {
                     </tr>
                 </thead>
                 <tbody>
-                    <PlayersTable />
+                    <PlayersTable players={players}/>
                 </tbody>
             </table>
             <form id="addPlayers">

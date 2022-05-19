@@ -1,10 +1,10 @@
 import React from 'react';
 import PlayersRow from './PlayersRow';
 
-function PlayersTable() {
+function PlayersTable({players}) {
     return (
         <>
-            <PlayersRow/>
+            {players.map((player) => <PlayersRow player={player} key={player.player_id}/>)}
         </>
     );
 };

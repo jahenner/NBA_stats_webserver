@@ -1,35 +1,35 @@
 import React from "react";
 import { MdDeleteForever, MdEditNote } from "react-icons/md";
 
-function PlayersRow() {
+function PlayersRow({player}) {
     return (
         <>
             <td>
-                Data
+                {player.first_name}
             </td>
             <td>
-                Data
+                {player.last_name}
             </td>
             <td>
-                Data
+                {player.age}
             </td>
             <td>
-                Data
+                {player.career_points}
             </td>
             <td>
-                Data
+                {player.career_steals}
             </td>
             <td>
-                Data
+                {player.career_blocks}
             </td>
             <td>
-                Data
+                {player.career_rebounds}
             </td>
             <td>
-                Data
+                {player.hometown}
             </td>
             <td>
-                Data
+                {player.curr_team}
             </td>
             <td><MdEditNote onClick={() => console.log("edit")} /></td>
         </>
