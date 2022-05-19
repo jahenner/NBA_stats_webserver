@@ -20,10 +20,10 @@ function Games() {
         const response = await fetch(`/GetGames/${game_id}`, { method: 'DELETE'});
         if (response.status === 204) {
             setDeleted(deleted+1);
-            history.push("/games")
         } else {
             console.error(`Failed to delete exercise with game_id = ${game_id}, status code = ${response.status}`);
         }
+        history.push("/games")
     };
 
     const addGame = async () => {
@@ -41,6 +41,7 @@ function Games() {
         } else {
             alert(`Failed to add game, status code = ${response.status}`);
         }
+        history.push("/games")
     }
 
     const editGame = async (e) => {
@@ -58,6 +59,7 @@ function Games() {
         } else {
             alert(`Failed to edit game, status code = ${response.status}`);
         }
+        history.push("/games")
     }
 
     const reset = () => {
