@@ -17,7 +17,7 @@ function Games() {
     const [deleted, setDeleted] = useState(0);
 
     const onDelete = async game_id => {
-        const response = await fetch(`/GetGames/${game_id}`, { method: 'DELETE'});
+        const response = await fetch(`/server/GetGames/${game_id}`, { method: 'DELETE'});
         if (response.status === 204) {
             setDeleted(deleted+1);
             history.push("/games")
@@ -29,7 +29,7 @@ function Games() {
     const addGame = async () => {
         const newGame = {date, homeTeam, awayTeam, homeScore, awayScore}
         console.log(newGame)
-        const response = await fetch("/addGame", {
+        const response = await fetch("/server/addGame", {
             method: 'POST',
             body: JSON.stringify(newGame),
             headers: {
@@ -46,7 +46,7 @@ function Games() {
     const editGame = async (e) => {
         console.log(game)
         // e.preventDefault()
-        const response = await fetch(`/UpdateGame/${game.game_id}`, {
+        const response = await fetch(`/server/UpdateGame/${game.game_id}`, {
             method: 'PUT',
             body: JSON.stringify(game),
             headers: {
@@ -74,7 +74,7 @@ function Games() {
 
     const loadGames = async () => {
         console.log("starting fetch");
-        const response = await fetch('/GetGames');
+        const response = await fetch('/server/GetGames');
         console.log("got response")
         const games = await response.json();
         console.log("getting results")
@@ -82,7 +82,7 @@ function Games() {
     };
 
     const loadTeams = async () => {
-        const response = await fetch('/GetTeams');
+        const response = await fetch('/server/GetTeams');
         const teams = await response.json();
         setTeams(teams)
     }
