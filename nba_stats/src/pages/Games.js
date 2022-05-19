@@ -2,9 +2,10 @@ import React from 'react';
 import GamesTable from '../components/GamesTable'
 import TeamOptions from '../components/TeamOptions.js'
 import { useState, useEffect } from 'react';
+import {useHistory} from 'react-router-dom'
 
 function Games() {
-
+    const history = useHistory();
     const [games, setGames] = useState([]);
     const [game, setGame] = useState({});
     const [teams, setTeams] = useState([]);
@@ -19,6 +20,7 @@ function Games() {
         const response = await fetch(`/GetGames/${game_id}`, { method: 'DELETE'});
         if (response.status === 204) {
             setDeleted(deleted+1);
+            history.push("/games")
         } else {
             console.error(`Failed to delete exercise with game_id = ${game_id}, status code = ${response.status}`);
         }
