@@ -2,8 +2,24 @@ import React from 'react';
 import PlayerStatsTable from '../components/PlayerStatsTable';
 import PlayerOptions from '../components/PlayerOptions';
 import GameOptions from '../components/GameOptions';
+import { useState, useEffect } from 'react';
 
 function PlayerStats() {
+    const [stats, setStats] = useState([]);
+
+    const loadStats = async () => {
+        console.log("starting fetch");
+        const response = await fetch('/server/GetStats');
+        console.log("got response")
+        const stats = await response.json();
+        console.log("getting results")
+        setStats(stats);
+    };
+
+    useEffect(() => {
+        loadStats();
+    }, []);
+
     return (
         <article>
             <h2>Player Stats</h2>
@@ -11,8 +27,7 @@ function PlayerStats() {
             <table>
                 <thead>
                     <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
+                        <th>Player Name</th>
                         <th>Date</th>
                         <th>Opposing Team</th>
                         <th>Rebounds</th>
@@ -34,7 +49,7 @@ function PlayerStats() {
                     </tr>
                 </thead>
                 <tbody>
-                    <PlayerStatsTable />
+                    <PlayerStatsTable stats={stats}/>
                 </tbody>
             </table>
             <form id="addPlayerStats">

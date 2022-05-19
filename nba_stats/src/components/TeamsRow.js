@@ -3,7 +3,7 @@ import { MdDeleteForever, MdEditNote } from "react-icons/md";
 
 function TeamsRow({team}) {
     return (
-        <>
+        <tr>
             <td>
                 {team.name}
             </td>
@@ -14,7 +14,7 @@ function TeamsRow({team}) {
                 {team.location}
             </td>
             <td><MdEditNote onClick={() => console.log("edit")} /></td>
-        </>
+        </tr>
         
     );
 };

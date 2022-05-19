@@ -1,10 +1,10 @@
 import React from 'react';
 import PlayerStatsRow from './PlayerStatsRow';
 
-function PlayerStatsTable() {
+function PlayerStatsTable({stats}) {
     return (
         <>
-            <PlayerStatsRow />
+            {stats.map((stat,i) => <PlayerStatsRow stat={stat} key={i}/>)}
         </>
     );
 };

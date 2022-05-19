@@ -1,62 +1,59 @@
 import React from "react";
 import { MdDeleteForever, MdEditNote } from "react-icons/md";
 
-function PlayerStatsRow() {
+function PlayerStatsRow({stat}) {
     return (
         <>
             <td>
-                Data
+                {stat.player_name}
             </td>
             <td>
-                Data
+                {stat.date}
             </td>
             <td>
-                Data
+                {stat.opposing_team}
             </td>
             <td>
-                Data
+                {stat.rebounds}
             </td>
             <td>
-                Data
+                {stat.blocks}
             </td>
             <td>
-                Data
+                {stat.steals}
             </td>
             <td>
-                Data
+                {stat.turnovers}
             </td>
             <td>
-                Data
+                {stat.minutes_played}
             </td>
             <td>
-                Data
+                {stat.started_game}
             </td>
             <td>
-                Data
+                {stat.freethrows_attempt}
             </td>
             <td>
-                Data
+                {stat.freethrows_made}
             </td>
             <td>
-                Data
+                {stat.field_goals_attempt}
             </td>
             <td>
-                Data
+                {stat.field_goals_made}
             </td>
             <td>
-                Data
+                {stat.three_attempt}
             </td>
             <td>
-                Data
+                {stat.three_made}
             </td>
             <td>
-                Data
+                {stat.assists}
             </td>
             <td>
-                Data
-            </td>
-            <td>
-                Data
+                {stat.fouls}
             </td>
             <td><MdEditNote onClick={() => console.log("edit")} /></td>
             <td><MdDeleteForever onClick={() => console.log("delete")} /></td>
