@@ -9,17 +9,7 @@ function Cities() {
     const [city, setCity] = useState({});
     const [name, setName] = useState("");
     const [population, setPopulation] = useState(0);
-    const [deleted, setDeleted] = useState(0);
-
-    const onDelete = async city_id => {
-        const response = await fetch(`/server/GetCities/${city_id}`, { method: 'DELETE'});
-        if (response.status === 204) {
-            setDeleted(deleted+1);
-            
-        } else {
-            console.error(`Failed to delete city with city_id = ${city_id}, status code = ${response.status}`);
-        }
-    };
+    const [editted, setEditted] = useState(0);
 
     const addCity = async (e) => {
         e.preventDefault()
@@ -52,6 +42,7 @@ function Cities() {
         });
         if (response.status === 201) {
             alert("Successfully edited the city");
+            setEditted(editted + 1)
         } else {
             alert(`Failed to edit city, status code = ${response.status}`);
         }
@@ -77,7 +68,7 @@ function Cities() {
 
     useEffect(() => {
         loadCities();
-    }, [deleted]);
+    }, [editted]);
 
     return (
         <article>
@@ -92,7 +83,7 @@ function Cities() {
                     </tr>
                 </thead>
                 <tbody>
-                    <CitiesTable cities={cities} onDelete={onDelete} setCity={setCity}/>
+                    <CitiesTable cities={cities} setCity={setCity}/>
                 </tbody>
             </table>
             <form id="addCities">

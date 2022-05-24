@@ -15,6 +15,7 @@ function Games() {
     const [homeScore, setHomeScore] = useState(0);
     const [awayScore, setAwayScore] = useState(0);
     const [deleted, setDeleted] = useState(0);
+    const [editted, setEditted] = useState(0);
 
     const onDelete = async game_id => {
         const response = await fetch(`/server/GetGames/${game_id}`, { method: 'DELETE'});
@@ -57,6 +58,7 @@ function Games() {
         });
         if (response.status === 201) {
             alert("Successfully edited the game");
+            setEditted(editted+1)
         } else {
             alert(`Failed to edit game, status code = ${response.status}`);
         }
@@ -92,7 +94,7 @@ function Games() {
     useEffect(() => {
         loadGames();
         loadTeams();
-    }, [deleted]);
+    }, [deleted, editted]);
 
     return (
         <article>

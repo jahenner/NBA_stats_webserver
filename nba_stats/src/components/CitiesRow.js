@@ -1,7 +1,7 @@
 import React from "react";
 import { MdDeleteForever, MdEditNote } from "react-icons/md";
 
-function CitiesRow({city}) {
+function CitiesRow({city, setCity}) {
     console.log(city)
     return (
         <>
@@ -12,7 +12,7 @@ function CitiesRow({city}) {
             <td>
                 {city.population}
             </td>
-            <td><MdEditNote onClick={() => console.log("edit")} /></td>
+            <td><MdEditNote onClick={() => setCity(city)} /></td>
         </tr>
         </>
         
