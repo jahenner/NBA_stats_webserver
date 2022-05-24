@@ -121,7 +121,7 @@ function Games() {
                 <legend><strong>Add Game</strong></legend>
                 <fieldset className="fields">
                     <label> Date </label> <input 
-                        type="text" 
+                        type="date" 
                         name="date" 
                         value={date} 
                         onChange={e => setDate(e.target.value)} />
@@ -149,7 +149,7 @@ function Games() {
                 <legend><strong>Edit Game (use the edit icon next to the Game you would like to edit)</strong></legend>
                 <fieldset className="fields">
                     <label> Date </label> <input 
-                        type="text" 
+                        type="date" 
                         name="date"
                         value={game.date}
                         onChange={e => setGame(game => ({...game, date: e.target.value}))} />
