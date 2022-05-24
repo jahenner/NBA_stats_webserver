@@ -1,10 +1,10 @@
 import React from "react";
 
 
-function CityOptionsRow() {
+function CityOptionsRow({city}) {
     return (
         // update value to id of team
-        <option value="1">CityNameData</option>
+        <option value={city.city_id}>{city.name}</option>
         
     );
 };

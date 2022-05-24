@@ -1,12 +1,12 @@
 import React from "react";
 import CityOptionsRow from './CityOptionsRow'
 
-function CityOptions() {
+function CityOptions({cities}) {
     return (
         <>
         {/* Loop through all cities */}
             <option value="0">&nbsp;</option>
-            <CityOptionsRow />
+            {cities.map((city) => <CityOptionsRow city={city} key={city.city_id} />)}
         </>
         
     );

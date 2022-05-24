@@ -24,10 +24,11 @@ function Cities() {
         });
         if (response.status === 201) {
             alert("Successfully added the city");
+            setEditted(editted+1);
+            reset();
         } else {
             alert(`Failed to add city, status code = ${response.status}`);
         }
-        history.push("/cities")
     }
 
     const editCity = async (e) => {

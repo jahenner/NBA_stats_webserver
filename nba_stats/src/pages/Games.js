@@ -40,10 +40,11 @@ function Games() {
         });
         if (response.status === 201) {
             alert("Successfully added the game");
+            setEditted(editted+1);
+            reset()
         } else {
             alert(`Failed to add game, status code = ${response.status}`);
         }
-        history.push("/games")
     }
 
     const editGame = async (e) => {
