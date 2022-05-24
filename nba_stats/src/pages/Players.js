@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 
 function Players() {
     const [players, setPlayers] = useState([]);
+    const [cities, setCities] = useState([]);
 
     const loadPlayers = async () => {
         console.log("starting fetch");
@@ -16,8 +17,15 @@ function Players() {
         setPlayers(players);
     };
 
+    const loadCities = async () => {
+        const response = await fetch('/server/GetCities');
+        const cities = await response.json();
+        setCities(cities)
+    }
+
     useEffect(() => {
         loadPlayers();
+        loadCities();
     }, []);
 
     return (
@@ -54,7 +62,7 @@ function Players() {
                     <label> Career Blocks </label> <input type="number" name="career_blocks" />
                     <label> Career Rebounds </label> <input type="number" name="career_rebounds" />
                     <label> Hometown </label> <select name="city_id">
-                        <CityOptions />
+                        <CityOptions cities={cities} />
                     </select>
                     <label> Current Team </label> <select name="team_id">
                         {/* <TeamOptions /> */}
@@ -74,7 +82,7 @@ function Players() {
                     <label> Career Blocks </label> <input type="number" name="career_blocks" />
                     <label> Career Rebounds </label> <input type="number" name="career_rebounds" />
                     <label> Hometown </label> <select name="city_id">
-                        <CityOptions />
+                        <CityOptions cities={cities} />
                     </select>
                     <label> Current Team </label> <select name="team_id">
                         {/* <TeamOptions /> */}

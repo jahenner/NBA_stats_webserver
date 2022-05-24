@@ -122,7 +122,7 @@ function Teams() {
                         name="mascot"
                         value={team.mascot}
                         onChange={e => setTeam(team => ({...team, mascot: e.target.value}))} />
-                    <label> Location </label> <select name="city_id" value={team.city_id} onChange={e => setTeam(team => ({...team, location: parseInt(e.target.value)}))}>
+                    <label> Location </label> <select name="city_id" value={team.city_id} onChange={e => setTeam(team => ({...team, city_id: parseInt(e.target.value)}))}>
                         <CityOptions cities={cities} />
                     </select>
                 </fieldset>
