@@ -126,10 +126,10 @@ function Games() {
                         value={date} 
                         onChange={e => setDate(e.target.value)} />
                     <label> Home Team </label> <select name="home_team_id" onChange={e => setHomeTeam(parseInt(e.target.value))}>
-                        <TeamOptions teams={teams} setHomeTeam={setHomeTeam} />
+                        <TeamOptions teams={teams} />
                     </select>
                     <label> Away Team </label> <select name="home_team_id" onChange={e => setAwayTeam(parseInt(e.target.value))}>
-                        <TeamOptions teams={teams} setAwayTeam={setAwayTeam} />
+                        <TeamOptions teams={teams} />
                     </select>
                     <label> Home Team Score </label> <input 
                         type="number" 
@@ -154,10 +154,10 @@ function Games() {
                         value={game.date}
                         onChange={e => setGame(game => ({...game, date: e.target.value}))} />
                     <label> Home Team </label> <select name="home_team_id" value={game.home_id} onChange={e => setGame(game => ({...game, home_id: parseInt(e.target.value)}))}>
-                        <TeamOptions teams={teams} setHomeTeam={setHomeTeam}/>
+                        <TeamOptions teams={teams} />
                     </select>
                     <label> Away Team </label> <select name="away_team_id" value={game.away_id} onChange={e => setGame(game => ({...game, away_id: parseInt(e.target.value)}))}>
-                        <TeamOptions teams={teams} setAwayTeam={setAwayTeam}/>
+                        <TeamOptions teams={teams} />
                     </select>
                     <label> Home Team Score </label> <input 
                         type="number" 

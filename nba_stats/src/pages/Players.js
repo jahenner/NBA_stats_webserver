@@ -8,6 +8,7 @@ function Players() {
     const [players, setPlayers] = useState([]);
     const [cities, setCities] = useState([]);
     const [teams, setTeams] = useState([]);
+    const [currTeam, setCurrTeam] = useState(0);
     const [player, setPlayer] = useState({});
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -21,7 +22,7 @@ function Players() {
 
     const addPlayer = async (e) => {
         e.preventDefault()
-        const newPlayer = {firstName, lastName, age, careerPoints, careerSteals, careerBlocks, careerRebounds, hometown}
+        const newPlayer = {firstName, lastName, age, careerPoints, careerSteals, careerBlocks, careerRebounds, hometown, currTeam}
         console.log(newPlayer)
         const response = await fetch("/server/addPlayer", {
             method: 'POST',
@@ -42,7 +43,7 @@ function Players() {
     const editPlayer = async (e) => {
         console.log(player)
         e.preventDefault()
-        const response = await fetch(`/server/UpdatePlayer/${player.id}`, {
+        const response = await fetch(`/server/UpdatePlayer/${player.player_id}`, {
             method: 'PUT',
             body: JSON.stringify(player),
             headers: {
@@ -132,15 +133,15 @@ function Players() {
                 <fieldset class="fields">
                     <label> First Name </label> <input type="text" name="first_name" value={firstName} onChange={e => setFirstName(e.target.value)} />
                     <label> Last Name </label> <input type="text" name="last_name" value={lastName} onChange={e => setLastName(e.target.value)} />
-                    <label> Age </label> <input type="number" name="age" value={age} onChange={e => setAge(e.target.value)} />
-                    <label> Career Points </label> <input type="number" name="career_points" value={careerPoints} onChange={e => setCareerPoints(e.target.value)} />
-                    <label> Career Steal </label> <input type="number" name="career_steals" value={careerSteals} onChange={e => setCareerSteals(e.target.value)} />
-                    <label> Career Blocks </label> <input type="number" name="career_blocks" value={careerBlocks} onChange={e => setCareerBlocks(e.target.value)}/>
-                    <label> Career Rebounds </label> <input type="number" name="career_rebounds" value={careerRebounds} onChange={e => setCareerRebounds(e.target.value)}/>
+                    <label> Age </label> <input type="number" name="age" value={age} onChange={e => setAge(parseInt(e.target.value))} />
+                    <label> Career Points </label> <input type="number" name="career_points" value={careerPoints} onChange={e => setCareerPoints(parseInt(e.target.value))} />
+                    <label> Career Steal </label> <input type="number" name="career_steals" value={careerSteals} onChange={e => setCareerSteals(parseInt(e.target.value))} />
+                    <label> Career Blocks </label> <input type="number" name="career_blocks" value={careerBlocks} onChange={e => setCareerBlocks(parseInt(e.target.value))}/>
+                    <label> Career Rebounds </label> <input type="number" name="career_rebounds" value={careerRebounds} onChange={e => setCareerRebounds(parseInt(e.target.value))}/>
                     <label> Hometown </label> <select name="city_id" value={hometown} onChange={e => setHometown(parseInt(e.target.value))}>
                         <CityOptions cities={cities} />
                     </select>
-                    <label> Current Team </label> <select name="team_id" value={teams} onChange={e => setTeams(parseInt(e.target.value))}>
+                    <label> Current Team </label> <select name="team_id" value={currTeam} onChange={e => setCurrTeam(parseInt(e.target.value))}>
                         <TeamOptions teams={teams}/>
                     </select>
                 </fieldset>
@@ -150,17 +151,17 @@ function Players() {
             <form id="editPlayers">
                 <legend><strong>Edit Player (use the edit icon next to the Player you would like to edit)</strong></legend>
                 <fieldset class="fields">
-                    <label> First Name </label> <input type="text" name="first_name" value={player.firstName} onChange={e => setPlayer(player => ({...player, first_name: e.target.value}))} />
-                    <label> Last Name </label> <input type="text" name="last_name" value={player.lastName} onChange={e => setPlayer(player => ({...player, last_name: e.target.value}))} />
-                    <label> Age </label> <input type="number" name="age" value={player.age} onChange={e => setPlayer(player => ({...player, age: e.target.value}))} />
-                    <label> Career Points </label> <input type="number" name="career_points" value={player.careerPoints} onChange={e => setPlayer(player => ({...player, career_points: e.target.value}))} />
-                    <label> Career Steal </label> <input type="number" name="career_steals" value={player.careerSteals} onChange={e => setPlayer(player => ({...player, career_steals: e.target.value}))} />
-                    <label> Career Blocks </label> <input type="number" name="career_blocks" value={player.careerBlocks} onChange={e => setPlayer(player => ({...player, career_blocks: e.target.value}))}/>
-                    <label> Career Rebounds </label> <input type="number" name="career_rebounds" value={player.careerRebounds} onChange={e => setPlayer(player => ({...player, career_rebounds: e.target.value}))}/>
-                    <label> Hometown </label> <select name="city_id" value={player.hometown} onChange={e => setPlayer(player => ({...player, city_id: parseInt(e.target.value)}))}>
+                    <label> First Name </label> <input type="text" name="first_name" value={player.first_name} onChange={e => setPlayer(player => ({...player, first_name: e.target.value}))} />
+                    <label> Last Name </label> <input type="text" name="last_name" value={player.last_name} onChange={e => setPlayer(player => ({...player, last_name: e.target.value}))} />
+                    <label> Age </label> <input type="number" name="age" value={player.age} onChange={e => setPlayer(player => ({...player, age: parseInt(e.target.value)}))} />
+                    <label> Career Points </label> <input type="number" name="career_points" value={player.career_points} onChange={e => setPlayer(player => ({...player, career_points: parseInt(e.target.value)}))} />
+                    <label> Career Steal </label> <input type="number" name="career_steals" value={player.career_steals} onChange={e => setPlayer(player => ({...player, career_steals: parseInt(e.target.value)}))} />
+                    <label> Career Blocks </label> <input type="number" name="career_blocks" value={player.career_blocks} onChange={e => setPlayer(player => ({...player, career_blocks: parseInt(e.target.value)}))}/>
+                    <label> Career Rebounds </label> <input type="number" name="career_rebounds" value={player.career_rebounds} onChange={e => setPlayer(player => ({...player, career_rebounds: parseInt(e.target.value)}))}/>
+                    <label> Hometown </label> <select name="city_id" value={player.city_id} onChange={e => setPlayer(player => ({...player, city_id: parseInt(e.target.value)}))}>
                         <CityOptions cities={cities} />
                     </select>
-                    <label> Current Team </label> <select name="team_id" value={player.teams} onChange={e => setPlayer(player => ({...player, team_id: parseInt(e.target.value)}))}>
+                    <label> Current Team </label> <select name="team_id" value={player.team_id} onChange={e => setPlayer(player => ({...player, team_id: parseInt(e.target.value)}))}>
                         <TeamOptions teams={teams} />
                     </select>
                 </fieldset>

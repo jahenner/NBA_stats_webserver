@@ -1,7 +1,7 @@
 import React from "react";
 import { MdDeleteForever, MdEditNote } from "react-icons/md";
 
-function PlayersRow({player}) {
+function PlayersRow({player, setPlayer}) {
     return (
         <tr>
             <td>
@@ -31,7 +31,7 @@ function PlayersRow({player}) {
             <td>
                 {player.curr_team}
             </td>
-            <td><MdEditNote onClick={() => console.log("edit")} /></td>
+            <td><MdEditNote onClick={() => setPlayer(player)} /></td>
         </tr>
         
     );
