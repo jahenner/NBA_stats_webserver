@@ -14,6 +14,7 @@ function PlayerStats() {
         const stats = await response.json();
         console.log("getting results")
         setStats(stats);
+        console.log(stats)
     };
 
     useEffect(() => {
