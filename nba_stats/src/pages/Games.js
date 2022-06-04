@@ -23,7 +23,7 @@ function Games() {
             setDeleted(deleted+1);
             
         } else {
-            console.error(`Failed to delete exercise with game_id = ${game_id}, status code = ${response.status}`);
+            console.error(`Failed to delete game with game_id = ${game_id}, status code = ${response.status}`);
         }
     };
 

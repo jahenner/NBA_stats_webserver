@@ -6,6 +6,19 @@ import { useState, useEffect } from 'react';
 
 function PlayerStats() {
     const [stats, setStats] = useState([]);
+    const [stat, setStat] = useState({})
+    const [editted, setEditted] = useState(0)
+
+    const onDelete = async player => {
+        const game_id = player.game_id
+        const response = await fetch(`/server/GetStats/${player.player_id}`, { method: 'DELETE', body: JSON.stringify({game_id})});
+        if (response.status === 204) {
+            setEditted(editted+1);
+            
+        } else {
+            console.error(`Failed to delete player stats with player_id = ${player.player_id} and game_id = ${game_id}, status code = ${response.status}`);
+        }
+    };
 
     const loadStats = async () => {
         console.log("starting fetch");
@@ -19,7 +32,7 @@ function PlayerStats() {
 
     useEffect(() => {
         loadStats();
-    }, []);
+    }, [editted]);
 
     return (
         <article>
@@ -50,7 +63,7 @@ function PlayerStats() {
                     </tr>
                 </thead>
                 <tbody>
-                    <PlayerStatsTable stats={stats}/>
+                    <PlayerStatsTable stats={stats} onDelete={onDelete} setStat={setStat} />
                 </tbody>
             </table>
             <form id="addPlayerStats">

@@ -1,7 +1,7 @@
 import React from "react";
 import { MdDeleteForever, MdEditNote } from "react-icons/md";
 
-function PlayerStatsRow({stat}) {
+function PlayerStatsRow({stat, onDelete, setStat}) {
     return (
         <tr>
             <td>
@@ -55,8 +55,8 @@ function PlayerStatsRow({stat}) {
             <td>
                 {stat.fouls}
             </td>
-            <td><MdEditNote onClick={() => console.log("edit")} /></td>
-            <td><MdDeleteForever onClick={() => console.log("delete")} /></td>
+            <td><MdEditNote onClick={() => setStat(stat)} /></td>
+            <td><MdDeleteForever onClick={() => onDelete(stat)} /></td>
         </tr>
         
     );
