@@ -1,10 +1,10 @@
 import React from "react";
 
 
-function GameOptionsRow() {
+function GameOptionsRow({game}) {
     return (
         // update value to id of game
-        <option value="1">GameNameData</option>
+        <option value={game.game_id}>{game.date}: {game.home_team} vs {game.away_team}</option>
         
     );
 };
