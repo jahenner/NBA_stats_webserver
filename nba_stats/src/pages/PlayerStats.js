@@ -5,6 +5,8 @@ import GameOptions from '../components/GameOptions';
 import { useState, useEffect } from 'react';
 
 function PlayerStats() {
+    const [search, setSearch] = useState(0);
+    const [searchName, setSearchName] = useState("");
     const [stats, setStats] = useState([]);
     const [stat, setStat] = useState({})
     const [players, setPlayers] = useState([])
@@ -88,6 +90,14 @@ function PlayerStats() {
         console.log(stats)
     };
 
+    const loadSearch = async (e) => {
+        setSearch(1)
+        e.preventDefault()
+        const response = await fetch(`/server/GetSearch/${searchName}`)
+        const stats = await response.json()
+        setStats(stats);
+    };
+
     const loadPlayers = async () => {
         const response = await fetch('/server/getPlayers');
         const players = await response.json();
@@ -126,15 +136,26 @@ function PlayerStats() {
     }
 
     useEffect(() => {
-        loadStats();
+        if (search === 0) {
+            loadStats();
+            setSearchName("")
+        } 
         loadPlayers();
         loadGames();
-    }, [editted]);
+    }, [editted, search]);
 
     return (
         <article>
             <h2>Player Stats</h2>
             <p>Below is the list of players in the NBA with their stats per game</p>
+            <form id="StatSearch">
+                <fieldset className="fields">
+                    <label>Player Search</label>
+                    <input type="search" name="PlayerSearch" placeholder='First and last name of the player' size="25" pattern='\w+\s+\w+' required onChange={e => setSearchName(e.target.value)}></input>
+                    <input className="btn" type="button" value="Search" onClick={(e) => loadSearch(e)}></input>
+                    <input className="btn" type="button" value="Cancel" onClick={() => setSearch(0)}></input>
+                </fieldset>
+            </form>
             <table id="PlayerStatTable">
                 <thead>
                     <tr>
@@ -165,7 +186,7 @@ function PlayerStats() {
             </table>
             <form id="addPlayerStats">
                 <legend><strong>Add Player Stats</strong></legend>
-                <fieldset class="fields">
+                <fieldset className="fields">
                     <label> Player </label> <select name="player_id" onChange={e => setPlayer_id(parseInt(e.target.value))} >
                         <PlayerOptions players={players} />
                     </select>
@@ -191,8 +212,8 @@ function PlayerStats() {
                     <label> Assists </label> <input type="number" name="assists" value={assists} onChange={e => setAssists(parseInt(e.target.value))} />
                     <label> Fouls </label> <input type="number" name="fouls" value={fouls} onChange={e => setFouls(parseInt(e.target.value))} />
                 </fieldset>
-                <input class="btn" type="submit" id="addPlayerStats" value="Add Player Stats" onClick={e => addStat(e)}></input>
-                <input class="btn" type="button" value="cancel" onClick={reset}></input>
+                <input className="btn" type="submit" id="addPlayerStats" value="Add Player Stats" onClick={e => addStat(e)}></input>
+                <input className="btn" type="button" value="cancel" onClick={reset}></input>
             </form>
             <form id="editPlayerStats">
                 <legend><strong>Edit Player Stats (use the edit icon next to the Player Stats you would like to edit)</strong></legend>
@@ -222,8 +243,8 @@ function PlayerStats() {
                     <label> Assists </label> <input type="number" name="assists" value={stat.assists} onChange={e => setStat(stat => ({...stat, assists: parseInt(e.target.value)}))} />
                     <label> Fouls </label> <input type="number" name="fouls" value={stat.fouls} onChange={e => setStat(stat => ({...stat, fouls: parseInt(e.target.value)}))} />
                 </fieldset>
-                <input class="btn" type="submit" id="editPlayerStats" value="Edit Player Stats" onClick={e => editStat(e)} ></input>
-                <input class="btn" type="button" value="cancel" onClick={resetEdit} ></input>
+                <input className="btn" type="submit" id="editPlayerStats" value="Edit Player Stats" onClick={e => editStat(e)} ></input>
+                <input className="btn" type="button" value="cancel" onClick={resetEdit} ></input>
             </form>
         </article>
         
