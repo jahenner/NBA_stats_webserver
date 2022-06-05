@@ -44,10 +44,10 @@ function PlayerStatsRow({stat, onDelete, setStat}) {
                 {stat.field_goals_made}
             </td>
             <td>
-                {stat.three_attempt}
+                {stat.three_points_attempt}
             </td>
             <td>
-                {stat.three_made}
+                {stat.three_points_made}
             </td>
             <td>
                 {stat.assists}

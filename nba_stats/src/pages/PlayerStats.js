@@ -59,6 +59,25 @@ function PlayerStats() {
         }
     };
 
+    const editStat = async (e) => {
+        console.log(stat)
+        e.preventDefault()
+        const response = await fetch(`/server/UpdateStat/${stat.player_id}&${stat.game_id}`, {
+            method: 'PUT',
+            body: JSON.stringify(stat),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        if (response.status === 201) {
+            alert("Successfully edited the stat");
+            setEditted(editted + 1)
+            resetEdit();
+        } else {
+            alert(`Failed to edit stat, status code = ${response.status}`);
+        }
+    }
+
     const loadStats = async () => {
         console.log("starting fetch");
         const response = await fetch('/server/GetStats');
@@ -102,6 +121,10 @@ function PlayerStats() {
 
     }
 
+    const resetEdit = () => {
+        setStat({})
+    }
+
     useEffect(() => {
         loadStats();
         loadPlayers();
@@ -112,7 +135,7 @@ function PlayerStats() {
         <article>
             <h2>Player Stats</h2>
             <p>Below is the list of players in the NBA with their stats per game</p>
-            <table>
+            <table id="PlayerStatTable">
                 <thead>
                     <tr>
                         <th>Player Name</th>
@@ -149,22 +172,22 @@ function PlayerStats() {
                     <label> Game </label> <select name="game_id" onChange={e => setGame_id(parseInt(e.target.value))} >
                         <GameOptions games={games}/>
                     </select>
-                    <label> Rebounds </label> <input type="number" name="rebounds" value={rebounds} onChange={e => setRebounds(parseInt(e.target.value))} />
+                    <label> Rebounds </label> <input type="number" name="rebounds" value={rebounds} onChange={e => setRebounds(parseInt(e.target.value))} /><br></br>
                     <label> Blocks </label> <input type="number" name="blocks" value={blocks} onChange={e => setBlocks(parseInt(e.target.value))} />
                     <label> Steals </label> <input type="number" name="steals" value={steals} onChange={e => setSteals(parseInt(e.target.value))} />
-                    <label> Turnovers </label> <input type="number" name="turnovers" value={turnovers} onChange={e => setTurnovers(parseInt(e.target.value))} />
+                    <label> Turnovers </label> <input type="number" name="turnovers" value={turnovers} onChange={e => setTurnovers(parseInt(e.target.value))} /><br></br>
                     <label> Minutes Played </label> <input type="number" name="minutes_played" value={minutes_played} onChange={e => setMinutes(parseInt(e.target.value))} />
                     <label> Started Game </label> <select name="started_game" value={started_game} onChange={e => setStarted(parseInt(e.target.value))} >
                         <option value="">&nbsp;</option>
                         <option value="0">False</option>
                         <option value="1">True</option>
-                        </select>
+                        </select><br></br>
                     <label> Freethrow Attemps </label> <input type="number" name="freethrow_attempts" value={freethrows_attempt} onChange={e => setFree_at(parseInt(e.target.value))} />
-                    <label> Freethrows Made </label> <input type="number" name="freethrows_made" value={freethrows_made} onChange={e => setFree_made(parseInt(e.target.value))} />
+                    <label> Freethrows Made </label> <input type="number" name="freethrows_made" value={freethrows_made} onChange={e => setFree_made(parseInt(e.target.value))} /><br></br>
                     <label> Field Goal Attemps </label> <input type="number" name="field_goal_attemps" value={field_goals_attempt} onChange={e => setFGA(parseInt(e.target.value))} />
-                    <label> Field Goals Made </label> <input type="number" name="field_goals_made" value={field_goals_made} onChange={e => setFGM(parseInt(e.target.value))} />
+                    <label> Field Goals Made </label> <input type="number" name="field_goals_made" value={field_goals_made} onChange={e => setFGM(parseInt(e.target.value))} /><br></br>
                     <label> 3 Point Attemps </label> <input type="number" name="3_point_attempts" value={three_points_attempt} onChange={e => set3PA(parseInt(e.target.value))} />
-                    <label> 3 Points Made </label> <input type="number" name="3_points_made" value={three_points_made} onChange={e => set3PM(parseInt(e.target.value))} />
+                    <label> 3 Points Made </label> <input type="number" name="3_points_made" value={three_points_made} onChange={e => set3PM(parseInt(e.target.value))} /><br></br>
                     <label> Assists </label> <input type="number" name="assists" value={assists} onChange={e => setAssists(parseInt(e.target.value))} />
                     <label> Fouls </label> <input type="number" name="fouls" value={fouls} onChange={e => setFouls(parseInt(e.target.value))} />
                 </fieldset>
@@ -174,33 +197,33 @@ function PlayerStats() {
             <form id="editPlayerStats">
                 <legend><strong>Edit Player Stats (use the edit icon next to the Player Stats you would like to edit)</strong></legend>
                 <fieldset class="fields">
-                    <label> Player </label> <select name="player_id">
+                    <label> Player </label> <select name="player_id" value={stat.player_id} onChange={e => setStat(stat => ({...stat, player_id: parseInt(e.target.value)}))}>
                         <PlayerOptions players={players} />
                     </select>
-                    <label> Game </label> <select name="game_id">
+                    <label> Game </label> <select name="game_id" value={stat.game_id} onChange={e => setStat(stat => ({...stat, game_id: parseInt(e.target.value)}))}>
                         <GameOptions games={games} />
                     </select>
-                    <label> Rebounds </label> <input type="text" name="rebounds" />
-                    <label> Blocks </label> <input type="text" name="blocks" />
-                    <label> Steals </label> <input type="number" name="steals" />
-                    <label> Turnovers </label> <input type="number" name="turnovers" />
-                    <label> Minutes Played </label> <input type="number" name="minutes_played" />
-                    <label> Started Game </label> <select name="started_game" >
+                    <label> Rebounds </label> <input type="text" name="rebounds" value={stat.rebounds} onChange={e => setStat(stat => ({...stat, rebounds: parseInt(e.target.value)}))}/><br></br>
+                    <label> Blocks </label> <input type="text" name="blocks" value={stat.blocks} onChange={e => setStat(stat => ({...stat, blocks: parseInt(e.target.value)}))}/>
+                    <label> Steals </label> <input type="number" name="steals" value={stat.steals} onChange={e => setStat(stat => ({...stat, steals: parseInt(e.target.value)}))} />
+                    <label> Turnovers </label> <input type="number" name="turnovers" value={stat.turnovers} onChange={e => setStat(stat => ({...stat, turnovers: parseInt(e.target.value)}))} /><br></br>
+                    <label> Minutes Played </label> <input type="number" name="minutes_played" value={stat.minutes_played} onChange={e => setStat(stat => ({...stat, minutes_played: parseInt(e.target.value)}))} />
+                    <label> Started Game </label> <select name="started_game" value={stat.started_game} onChange={e => setStat(stat => ({...stat, started_game: parseInt(e.target.value)}))} >
                         <option value="">&nbsp;</option>
                         <option value="0">False</option>
                         <option value="1">True</option>
-                        </select>
-                    <label> Freethrow Attemps </label> <input type="number" name="freethrow_attempts" />
-                    <label> Freethrows Made </label> <input type="number" name="freethrows_made" />
-                    <label> Field Goal Attemps </label> <input type="number" name="field_goal_attemps" />
-                    <label> Field Goals Made </label> <input type="number" name="field_goals_made" />
-                    <label> 3 Point Attemps </label> <input type="number" name="3_point_attempts" />
-                    <label> 3 Points Made </label> <input type="number" name="3_points_made" />
-                    <label> Assists </label> <input type="number" name="assists" />
-                    <label> Fouls </label> <input type="number" name="fouls" />
+                        </select><br></br>
+                    <label> Freethrow Attemps </label> <input type="number" name="freethrow_attempts" value={stat.freethrows_attempt} onChange={e => setStat(stat => ({...stat, freethrows_attempt: parseInt(e.target.value)}))} />
+                    <label> Freethrows Made </label> <input type="number" name="freethrows_made" value={stat.freethrows_made} onChange={e => setStat(stat => ({...stat, freethrows_made: parseInt(e.target.value)}))}/><br></br>
+                    <label> Field Goal Attemps </label> <input type="number" name="field_goal_attemps" value={stat.field_goals_attempt} onChange={e => setStat(stat => ({...stat, field_goals_attempt: parseInt(e.target.value)}))} />
+                    <label> Field Goals Made </label> <input type="number" name="field_goals_made" value={stat.field_goals_made} onChange={e => setStat(stat => ({...stat, field_goals_made: parseInt(e.target.value)}))}/><br></br>
+                    <label> 3 Point Attemps </label> <input type="number" name="3_point_attempts" value={stat.three_points_attempt} onChange={e => setStat(stat => ({...stat, three_points_attempt: parseInt(e.target.value)}))} />
+                    <label> 3 Points Made </label> <input type="number" name="3_points_made" value={stat.three_points_made} onChange={e => setStat(stat => ({...stat, three_points_made: parseInt(e.target.value)}))} /><br></br>
+                    <label> Assists </label> <input type="number" name="assists" value={stat.assists} onChange={e => setStat(stat => ({...stat, assists: parseInt(e.target.value)}))} />
+                    <label> Fouls </label> <input type="number" name="fouls" value={stat.fouls} onChange={e => setStat(stat => ({...stat, fouls: parseInt(e.target.value)}))} />
                 </fieldset>
-                <input class="btn" type="submit" id="editPlayerStats" value="Edit Player Stats"></input>
-                <input class="btn" type="button" value="cancel"></input>
+                <input class="btn" type="submit" id="editPlayerStats" value="Edit Player Stats" onClick={e => editStat(e)} ></input>
+                <input class="btn" type="button" value="cancel" onClick={resetEdit} ></input>
             </form>
         </article>
         
